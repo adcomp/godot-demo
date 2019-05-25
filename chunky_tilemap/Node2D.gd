@@ -13,7 +13,7 @@ func _ready():
 	grid_h = grid_size.y * cell_size.y
 	
 	$Player.set_position(offset)
-	$TileMap.generate_world(offset)
+	$TileMap.generate_chunck(offset)
 
 func _process(delta):
 	var player_x = int($Player.get_position().x)
@@ -29,50 +29,44 @@ func _process(delta):
 	# check à droite
 	offset.x = x + grid_w
 	offset.y = y
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 
 	# check à gauche
 	offset.x = x - grid_w
 	offset.y = y
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 	
 	# check au dessus
 	offset.x = x
 	offset.y = y - grid_h
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 
 	# check en dessous
 	offset.x = x
 	offset.y = y + grid_h
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 
 	# check coin haut gauche
 	offset.x = x - grid_w
 	offset.y = y - grid_h
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 
 	# check coin haut droite
 	offset.x = x + grid_w
 	offset.y = y - grid_h
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 
 	# check coin bas droite
 	offset.x = x + grid_w
 	offset.y = y + grid_h
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 
 	# check coin bas gauche
 	offset.x = x - grid_w
 	offset.y = y + grid_h
-	if $TileMap.get_cellv($TileMap.world_to_map(offset)) == -1:
-		$TileMap.generate_world(offset)
+	check_for_chunk(offset)
 
 
-
+func check_for_chunk(pos):
+	if $TileMap.get_cellv($TileMap.world_to_map(pos)) == -1:
+		$TileMap.generate_chunck(pos)

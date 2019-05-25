@@ -13,7 +13,7 @@ func _ready():
 	open_simplex_noise.lacunarity = 1.5 
 	open_simplex_noise.persistence = 0.75
 
-func generate_world(offset):
+func generate_chunck(offset):
 
 	var o_x = int (offset.x / (cell_size.x * grid_size.x))
 	var o_y = int (offset.y / (cell_size.y * grid_size.y))
